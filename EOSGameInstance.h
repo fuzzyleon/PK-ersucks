@@ -7,7 +7,7 @@
 #include "EOSGameInstance.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class DEADMAZE_API UEOSGameInstance : public UGameInstance
@@ -20,11 +20,11 @@ public:
 	virtual void Init() override;
 
 	UFUNCTION(BlueprintCallable)
-	void CreateSessoin();
+		void CreateSession();
 
 	void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);
 
 protected:
 	class IOnlineSubsystem* OnlineSubsystem;
-	
+
 };
