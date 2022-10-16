@@ -27,29 +27,28 @@ void UEOSGameInstance::CreateSession()
 		{
 			FOnlineSessionSettings SessionSettings;
 			SessionSettings.bIsDedicated = false;
-			SessionSettings.bSchouldAdvertise = true;
-			SessionSettings.bIsLanMatch = true;
+			SessionSettings.bShouldAdvertise = true;
+			SessionSettings.bIsLANMatch = true;
 			SessionSettings.NumPublicConnections = 5;
 			SessionSettings.bAllowJoinInProgress = true;
 			SessionSettings.bAllowJoinViaPresence = true;
 			SessionSettings.bUsesPresence = true;
 
-			SessionPtr->ClearOnCreateSessionCompleteDelegates.AddUObject(this, &UEOSInstance::OnCreateSessionComplete);
-			SessionPtr->CreateSession(0, FName("Test Session"), )
+			SessionPtr->OnCreateSessionCompleteDelegates.AddUObject(this, &UEOSGameInstance::OnCreateSessionComplete);
+			SessionPtr->CreateSession(HostingPlayerNum:0, FName("Test Session"), SessionSettings);
 		}
 	}
 }
 
-void UEOSInstance::OnCreateSessionComplete(FName SessionName, bool bWasSuccessful)
+void UEOSGameInstance::OnCreateSessionComplete(FName SessionName, bool bWasSuccessful)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Succes: %d"), bWasSuccesful);
-	
-	/*/if (OnlineSubsystem)
+
+	if (OnlineSubsystem)
 	{
 		if (IOnlineSessionPtr SessionPtr = OnlineSubsystem->GetSessionInterface())
 		{
 			SessionPtr->ClearOnCreateSessionCompleteDelegates(Object:this);
 		}
-	}*/
+	}
 }
-
